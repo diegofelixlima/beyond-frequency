@@ -1,0 +1,6 @@
+FILE: 2025-lfw-fashion-east-review
+QUESTION: P1
+CONDITION: LLM-only
+============================================================
+
+The dominant trends in the Fashion East Fall 2025 collection include twisted tailoring, sculptural draping, and reconstructed techwear. Additionally, there is an emphasis on hybridizing familiar pieces into new expressions, structured forms, and knitwear, resulting in uniquely striking silhouettes that are minimalist, languorous, and powerful.

@@ -1,0 +1,18 @@
+FILE: corpus_lfw_aw25
+QUESTION: P3
+CONDITION: KG+LLM
+============================================================
+
+The London Autumn/Winter 2025 (AW25) fashion scene showcased several notable trends as reflected in the reviews from various fashion shows. 
+
+1. **Material Usage**: A variety of materials were prominently featured across collections. For instance, the **Burberry Fall 2025 fashion show** utilized materials such as **wool**, **velvet**, **fur**, **quilted fabric**, and **leather** (relations: `USES_MATERIAL`). Similarly, **Simone Rocha's collection** included **beaver**, **satin**, and **denim** (relations: `USES_MATERIAL`), while **Dilara Findikoglu's collection** featured **snakeskin**, **hefty hides**, and **natural fibres** (relations: `USES_MATERIAL`).
+
+2. **Color Palette**: The color trends leaned towards earthy and muted tones. The **Burberry collection** incorporated colors like **brown**, **green**, **burgundy**, and **patinated gold** (relations: `USES_COLOR`). In contrast, **Erdem's collection** also featured **burgundy** and **muted brushstrokes** (relations: `USES_COLOR`), while **Simone Rocha** used **pearl** and **bold brushstrokes** (relations: `USES_COLOR`).
+
+3. **Silhouettes**: The silhouettes presented were diverse and innovative. The **Burberry show** highlighted silhouettes such as a **trench-dress hybrid** and **tartan trouser/skirt hybrid** (relations: `FEATURES_SILHOUETTE`). **Roksanda Ilincic's collection** showcased **asymmetrical** and **sculptural** silhouettes (relations: `FEATURES_SILHOUETTE`), while **Jawara Alleyne** emphasized a **maximalist** approach (relations: `FEATURES_SILHOUETTE`).
+
+4. **Cultural References**: Many collections drew inspiration from cultural themes. For example, **Burberry** referenced the **British countryside** (relation: `REFERENCES_CULTURE`), while **Dilara Findikoglu** was inspired by **uncomfortable conversations** and **the state of the world** (relations: `INSPIRED_BY`). **Simone Rocha** referenced **Aesop’s fable** (relation: `REFERENCES_CULTURE`), and **Roksanda** drew from the concept of a **woman artist** (relation: `REFERENCES_CULTURE`).
+
+5. **Associations**: The collections were often associated with broader themes. For instance, **Burberry** was associated with **country life** and **aristocracy** (relations: `ASSOCIATED_WITH`), while **Dilara Findikoglu** focused on themes of **women's autonomy** and **empowerment** (relations: `ASSOCIATED_WITH`). 
+
+Overall, the trends at London AW25 reflected a blend of traditional materials and silhouettes with modern cultural references and themes of empowerment and identity.

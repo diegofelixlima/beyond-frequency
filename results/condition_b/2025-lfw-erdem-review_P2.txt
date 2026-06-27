@@ -1,0 +1,20 @@
+FILE: 2025-lfw-erdem-review
+QUESTION: P2
+CONDITION: KG+LLM
+============================================================
+
+The trends characterized in the collection presented by Erdem Moralıoğlu at the Fall 2025 Fashion Show can be understood through several explicit relations in the knowledge graph.
+
+1. **Material Usage**: The collection prominently **USES_MATERIAL** such as **jersey**, **organza**, **cotton**, **neoprene**, and **laser-cut fabric**. This indicates a trend towards diverse and innovative fabric choices that enhance the collection's aesthetic and functionality.
+
+2. **Color Palette**: The collection **USES_COLOR** that includes **burgundy** and **muted brushstrokes**, suggesting a trend towards rich, deep colors and subtle artistic expressions in the color scheme.
+
+3. **Silhouette Features**: The collection features various silhouettes, including the **bandeau dress**, **column dress**, and **drop-waist flapper style**. This variety reflects a trend towards both classic and modern interpretations of dress shapes.
+
+4. **Cultural References**: The collection **REFERENCES_CULTURE** related to **domesticity**, which may indicate a trend that draws inspiration from home life and personal spaces, creating a sense of intimacy in fashion.
+
+5. **Inspirational Sources**: The collection is **INSPIRED_BY** **Kaye Donachie**, who is associated with **Scottish** culture and concepts like **ethereal renderings**, **poetic licence**, and **emotive exploration**. This connection suggests a trend that embraces cultural narratives and emotional depth in design.
+
+6. **Techniques**: The collection **CO_OCCURS_WITH** both **technical techniques** and **analogue techniques**, indicating a trend that merges modern technology with traditional craftsmanship, enhancing the overall design process.
+
+These relations collectively illustrate a trend that is rich in material diversity, color depth, silhouette variety, cultural storytelling, and a blend of innovative and traditional techniques.

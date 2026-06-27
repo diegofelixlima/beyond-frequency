@@ -1,0 +1,22 @@
+FILE: corpus_lfw_aw25
+QUESTION: P3
+CONDITION: LLM-only
+============================================================
+
+The trends that dominated London Autumn/Winter 2025 (AW25) included:
+
+1. **Countryside Inspiration**: Burberry's collection showcased a pastoral theme with a focus on British countryside aesthetics, featuring a color palette of browns, greens, and burgundies, along with classic outerwear like trenches and bombers.
+
+2. **Sculptural and Textural Designs**: Roksanda's collection emphasized sculptural forms and rich textures, inspired by a woman sculptor, blending everyday materials with sophisticated designs.
+
+3. **Exploration of Feminine Identity**: Dilara Findikoglu's collection focused on themes of chaos and control, empowering women to define their own narratives, while Simone Rocha's work highlighted a slow evolution of hyper-feminine styles.
+
+4. **Craft Techniques and Artistic References**: S.S. Daley drew inspiration from the Scottish Colourists, incorporating craft techniques into wearable art, while Erdem collaborated with an artist to merge fashion with contemporary art.
+
+5. **Innovative Outerwear**: The use of luxurious materials and functional designs in outerwear was prominent, as seen in Burberry's sumptuous wool pieces and Di Petsa's exploration of textures.
+
+6. **Sustainable and Repurposed Fashion**: Jawara Alleyne's focus on sustainable design through repurposing and rethinking clothing as long-term investments was a notable trend.
+
+7. **Playful and Quirky Elements**: Collections featured playful designs, such as fur accents and whimsical accessories, reflecting a blend of seriousness and fun in fashion.
+
+Overall, the collections showcased a mix of traditional British elements, artistic influences, and a strong emphasis on sustainability and empowerment.
