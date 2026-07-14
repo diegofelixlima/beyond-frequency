@@ -40,7 +40,7 @@ beyond-frequency/
 │   └── prompts.md       # AI tool usage declaration (CNPq Portaria 2.664/2026)
 ├── doc/
 │   └── article.tex      # LaTeX source of the paper
-├── tests/           # Reserved for smoke tests (future work)
+├── tests/               # Reserved for smoke tests (future work)
 │   └── .gitkeep
 ├── CITATION.cff
 ├── CONTRIBUTING.md
