@@ -1,1 +1,23 @@
-
+cff-version: 1.2.0
+message: "If you use this software or data, please cite it as below."
+type: software
+title: "Além da Frequência: Grafos de Conhecimento para Análise de Tendências de Moda"
+title-en: "Beyond Frequency: Knowledge Graphs for Fashion Trend Analysis"
+abstract: "Experimental pipeline comparing LLM-only vs KG+LLM approaches for fashion trend analysis using reviews from London Fashion Week AW25."
+authors:
+  - family-names: Lima
+    given-names: Diego F. B.
+    email: diego.felix@copin.ufcg.edu.br
+    affiliation: "Universidade Federal de Campina Grande — PPGCC"
+repository-code: "https://github.com/diegofelixlima/beyond-frequency"
+doi: "10.5281/zenodo.21365305"
+url: "https://doi.org/10.5281/zenodo.21365305"
+version: "1.0"
+date-released: "2026-07"
+license: MIT
+keywords:
+  - knowledge graphs
+  - fashion trends
+  - large language models
+  - open science
+  - reproducibility
