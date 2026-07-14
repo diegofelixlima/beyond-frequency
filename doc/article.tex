@@ -1,0 +1,246 @@
+\documentclass[sigconf]{acmart}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[brazil]{babel}
+\usepackage{hyperref}
+
+\AtBeginDocument{%
+  \providecommand\BibTeX{{%
+    Bib\TeX}}}
+
+\settopmatter{printacmref=false}
+\renewcommand\footnotetextcopyrightpermission[1]{}
+\acmConference{}{}{}
+\acmYear{}
+\acmISBN{}
+\acmDOI{}
+\pagestyle{plain}
+
+\begin{document}
+
+\title{Além da Frequência: Grafos de Conhecimento para Análise de Tendências de Moda}
+
+\author{Diego Félix Beserra de Lima}
+\affiliation{%
+  \institution{Universidade Federal de Campina Grande}
+  \department{Programa de Pós-Graduação em Ciência da Computação}
+  \city{Campina Grande}
+  \state{Paraíba}
+  \country{Brasil}
+}
+\email{diego.felix@copin.ufcg.edu.br}
+
+\begin{abstract}
+A análise de tendências de moda envolve a interpretação de relações complexas entre entidades do domínio. Abordagens computacionais baseadas em correlação estatística não representam essa dimensão de forma adequada. Este trabalho propõe a construção de um grafo de conhecimento (KG) a partir de textos especializados em moda e avalia, por meio de um experimento comparativo e reproduzível, se respostas geradas com apoio do grafo são mais interpretáveis e fundamentadas do que respostas geradas diretamente sobre texto bruto por um modelo de linguagem de grande escala (LLM). O corpus consiste em reviews da London Fashion Week AW25, disponibilizados publicamente. O pipeline completo é disponibilizado como código aberto, em conformidade com os princípios de Open Science.
+\end{abstract}
+
+\keywords{grafos de conhecimento, tendências de moda, modelos de linguagem, reprodutibilidade, Open Science}
+
+\maketitle
+\sloppy
+
+%%
+%% INTRODUÇÃO
+%%
+\section{Introdução}
+
+A análise de tendências de moda é um processo complexo que envolve a interpretação de sinais estéticos, culturais e sociais provenientes de múltiplas fontes, como desfiles, mídias digitais, publicações especializadas e manifestações culturais emergentes. Ela é peça-chave da indústria da moda, setor avaliado em aproximadamente US\$ 1,84 trilhão em 2025~\cite{statista2025}, sobre a qual marcas, designers e investidores baseiam decisões estratégicas de criação, marketing, produção e operação.
+
+Nos últimos anos, abordagens computacionais baseadas em aprendizado de máquina têm sido amplamente exploradas para apoiar tarefas relacionadas à moda, incluindo recomendação, previsão e análise de tendências~\cite{jiju2024}. Embora essas abordagens tenham alcançado avanços relevantes, a literatura aponta limitações recorrentes. Ao reduzir o domínio a padrões de frequência e correlação estatística, elas ignoram a dimensão relacional e contextual que define o fenômeno da moda. Barthes~\cite{barthes1967} descreve a moda como um sistema de signos no qual o significado emerge das relações entre elementos, não de sua ocorrência isolada, argumento que fundamenta a escolha de grafos de conhecimento como estrutura de representação.
+
+As abordagens computacionais atuais não representam adequadamente as relações complexas entre entidades do domínio, comprometendo a qualidade da análise de tendências. Falta uma estrutura de conhecimento capaz de representar explicitamente essas relações~\cite{hogan2021}.
+
+Para superar essa limitação, este trabalho propõe a construção de um grafo de conhecimento (KG) a partir de textos especializados em moda e avalia, por meio de um experimento comparativo e reproduzível, se respostas geradas com apoio do grafo são mais interpretáveis e fundamentadas do que respostas geradas diretamente sobre texto bruto por um modelo de linguagem de grande escala (LLM).
+
+Este trabalho é guiado pela seguinte questão de pesquisa: em que medida respostas sobre tendências de moda geradas com apoio de um grafo de conhecimento são mais interpretáveis e fundamentadas do que respostas geradas diretamente sobre texto bruto por um modelo de linguagem de grande escala (LLM)?
+
+As principais contribuições deste trabalho são: (i) um experimento comparativo que apresenta evidências preliminares de que respostas sobre tendências de moda geradas com apoio de um KG são mais interpretáveis e fundamentadas do que respostas geradas diretamente sobre texto bruto; (ii) um corpus fixo e público de reviews especializados em moda, coletado segundo critério de inclusão auditável e replicável por terceiros; (iii) um pipeline completo disponibilizado como código aberto no GitHub, permitindo que qualquer pesquisador reproduza o experimento a partir dos mesmos dados, código e configurações, em conformidade com os princípios de Open Science.
+
+O restante deste artigo está organizado da seguinte forma. A Seção~\ref{sec:metodologia} apresenta a Metodologia. A Seção~\ref{sec:resultados} apresenta Resultados e Discussão. A Seção~\ref{sec:ameacas} apresenta Ameaças à Validade. A Seção~\ref{sec:conclusao} apresenta a Conclusão. A Seção~\ref{sec:reproducibilidade} apresenta Reprodutibilidade (Artefatos).
+
+%%
+%% METODOLOGIA
+%%
+\section{Metodologia}
+\label{sec:metodologia}
+
+\subsection{Design do Experimento}
+
+O experimento é conduzido por meio de um estudo comparativo com duas condições:
+
+\begin{itemize}
+  \item \textbf{Condição A:} o LLM recebe o texto bruto diretamente e gera uma resposta.
+  \item \textbf{Condição B:} o LLM extrai triplas semânticas do texto, que são estruturadas em um KG, e uma consulta ao grafo alimenta a geração da resposta final.
+\end{itemize}
+
+\noindent\textbf{Variável Independente.} A presença ou ausência do KG no pipeline de geração de respostas.
+
+\noindent\textbf{Variável Dependente.} A qualidade das respostas geradas, avaliada em duas dimensões: interpretabilidade e fundamentação.
+
+\noindent\textbf{Métricas.} Escala Likert de 1 a 5 aplicada a cada dimensão por resposta gerada.
+
+\noindent\textbf{Avaliação.} A avaliação das respostas é realizada pelo próprio autor, por meio de análise qualitativa estruturada. Para cada resposta, os critérios de interpretabilidade e fundamentação são aplicados de forma independente, com base em definições explícitas e documentadas, garantindo consistência e rastreabilidade do processo avaliativo.
+
+\noindent\textbf{Perguntas de Avaliação.} As perguntas são divididas em dois tipos:
+
+\textit{Intra-documento} (aplicadas individualmente a cada review):
+\begin{itemize}
+  \item P1 --- Quais são as tendências dominantes nesta coleção?
+  \item P2 --- Quais relações entre elementos caracterizam essas tendências?
+\end{itemize}
+
+\textit{Inter-documento} (aplicada uma vez ao corpus completo):
+\begin{itemize}
+  \item P3 --- Quais tendências dominaram Londres AW25?
+\end{itemize}
+
+Os nove tipos de relação foram definidos a priori pelo pesquisador com base na teoria semiótica da moda. Barthes~\cite{barthes1967} descreve a moda como um sistema de signos no qual o significado emerge das relações entre elementos, não de sua ocorrência isolada. Essa estrutura relacional justifica diretamente o uso de triplas semânticas no formato (entidade, relação, entidade) como unidade de representação do conhecimento. Os tipos definidos cobrem as dimensões estética (\texttt{USES\_MATERIAL}, \texttt{FEATURES\_SILHOUETTE}, \texttt{USES\_COLOR}), simbólica (\texttt{REFERENCES\_CULTURE}, \texttt{INSPIRED\_BY}, \texttt{ASSOCIATED\_WITH}) e social (\texttt{DESIGNED\_BY}, \texttt{PRESENTED\_AT}, \texttt{CO\_OCCURS\_WITH}) do fenômeno da moda.
+
+\subsection{Dados}
+
+Os dados consistem em reviews de fashion shows coletados do website The Impression, fonte editorial com cobertura crítica e descritiva de coleções por temporada. O corpus é composto por nove reviews da London Fashion Week AW25 (Autumn/Winter 2025), segundo o calendário oficial do BFC (British Fashion Council). O critério de inclusão é auditável e replicável: todos os shows físicos do calendário oficial com review publicado no The Impression.
+
+A coleta é realizada manualmente em substituição ao scraping automatizado, garantindo controle sobre a qualidade e integridade dos textos selecionados e simplificando a reprodutibilidade do experimento. Os textos são armazenados em formato de texto puro, com volume total estimado em 100KB, e disponibilizados publicamente via GitHub sem restrições de acesso.
+
+\subsection{Ferramentas e Ambiente}
+
+\noindent\textbf{Ambiente de execução.} Google Colab --- elimina a necessidade de instalação local e garante reprodutibilidade do ambiente computacional.
+
+\noindent\textbf{Linguagem.} Python.
+
+\noindent\textbf{Grafo de conhecimento.} NetworkX --- construção e consulta do grafo em memória.
+
+\noindent\textbf{Modelo de linguagem.} OpenAI API --- chamadas diretas, sem frameworks de orquestração, garantindo transparência e estabilidade do pipeline.
+
+\noindent\textbf{Repositório.} GitHub --- código, dados e configurações versionados e disponibilizados publicamente, em conformidade com os princípios de Open Science.
+
+%%
+%% SEÇÕES FUTURAS (placeholders)
+%%
+\section{Resultados e Discussão}
+\label{sec:resultados}
+
+Para responder à questão de pesquisa, foi conduzido um experimento comparativo em quatro etapas, executado em ambiente Google Colab. Primeiramente, os dados brutos foram limpos, mantendo apenas o conteúdo editorial de cada review. Em seguida, triplas semânticas foram extraídas de cada texto por meio da API da OpenAI, abordagem alinhada ao estado da arte em construção automática de grafos de conhecimento~\cite{zhong2023}, e um grafo de conhecimento foi construído com o NetworkX a partir do conjunto completo de triplas extraídas. Por fim, o experimento comparativo foi executado sobre as condições A e B, por meio de três perguntas de avaliação: duas intra-documento e uma inter-documento.
+
+O experimento foi conduzido conforme planejado na metodologia, com resultados sumarizados na Tabela~\ref{tab:pipeline}. Foram coletados e limpos nove reviews da London Fashion Week AW25 provenientes do The Impression. A extração de triplas semânticas resultou em 202 triplas, com média de 22 triplas por review. O grafo de conhecimento construído a partir dessas triplas possui 197 nós (entidades únicas), 194 arestas (relações) e nove tipos de relação distintos. Ao todo, foram gerados 38 arquivos de resultado, sendo 36 intra-documento e 2 inter-documento, para avaliação comparativa entre as duas condições.
+
+\begin{table}[h]
+\caption{Estatísticas do pipeline experimental}
+\label{tab:pipeline}
+\begin{tabular}{lr}
+\hline
+\textbf{Etapa} & \textbf{Resultado} \\
+\hline
+Reviews coletados e limpos & 9 \\
+Triplas extraídas (total) & 202 \\
+Média de triplas por review & 22 \\
+Nós no grafo (entidades únicas) & 197 \\
+Arestas no grafo (relações) & 194 \\
+Tipos de relação & 9 \\
+Arquivos de resultado gerados & 38 \\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{table}[h]
+\caption{Distribuição dos tipos de relação no grafo}
+\label{tab:relacoes}
+\begin{tabular}{lr}
+\hline
+\textbf{Tipo de Relação} & \textbf{Ocorrências} \\
+\hline
+USES\_MATERIAL & 35 \\
+ASSOCIATED\_WITH & 35 \\
+CO\_OCCURS\_WITH & 33 \\
+FEATURES\_SILHOUETTE & 29 \\
+INSPIRED\_BY & 16 \\
+USES\_COLOR & 14 \\
+REFERENCES\_CULTURE & 14 \\
+DESIGNED\_BY & 10 \\
+PRESENTED\_AT & 8 \\
+\hline
+\textbf{Total} & \textbf{194} \\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{table}[h]
+\caption{Avaliação Likert (1--5) das respostas por condição e pergunta (P1 e P2: coleção Erdem Fall 2025; P3: corpus completo LFW AW25)}
+\label{tab:likert}
+\begin{tabular}{lcccc}
+\hline
+ & \multicolumn{2}{c}{\textbf{Condição A (LLM-only)}} & \multicolumn{2}{c}{\textbf{Condição B (KG+LLM)}} \\
+\textbf{Pergunta} & \textbf{Interp.} & \textbf{Fund.} & \textbf{Interp.} & \textbf{Fund.} \\
+\hline
+P1 (intra-doc.) & 5 & 3 & 3 & 5 \\
+P2 (intra-doc.) & 4 & 3 & 3 & 5 \\
+P3 (inter-doc.) & 5 & 3 & 2 & 5 \\
+\hline
+\textbf{Média} & \textbf{4,7} & \textbf{3,0} & \textbf{2,7} & \textbf{5,0} \\
+\hline
+\end{tabular}
+\end{table}
+
+Os resultados da avaliação Likert são apresentados na Tabela~\ref{tab:likert}. A coleção Erdem foi selecionada como caso ilustrativo por apresentar cobertura das três dimensões do domínio, estética, simbólica e social, nas triplas extraídas, além de colaboração artística explícita que evidencia relações não capturáveis por abordagens frequenciais.
+
+A primeira pergunta de avaliação, ``Quais são as tendências dominantes nesta coleção?'', foi aplicada individualmente a cada review. A coleção Erdem Fall 2025 foi utilizada como caso ilustrativo para comparação das duas condições. Na Condição A, o modelo de linguagem produziu respostas fluentes e narrativas, porém as tendências são baseadas em inferências interpretativas não rastreáveis ao texto original, como ``Fluidity and Ethereality'' e ``Artistic Collaboration''. Na Condição B, cada afirmação foi ancorada em uma relação explícita do grafo, como \texttt{USES\_MATERIAL}, \texttt{USES\_COLOR} e \texttt{FEATURES\_SILHOUETTE}, permitindo que qualquer pessoa verifique no grafo por que determinada afirmação foi feita. Em contrapartida, o texto da Condição B apresentou menor fluidez, com os nomes exatos dos tipos de relação aparecendo explicitamente nas respostas, o que compromete a leiturabilidade.
+
+A segunda pergunta de avaliação, ``Quais relações entre elementos caracterizam essas tendências?'', também foi aplicada individualmente a cada review. A coleção Erdem Fall 2025 foi novamente utilizada como caso ilustrativo. Na Condição A, o modelo de linguagem respondeu de forma semelhante à primeira pergunta, com relações narrativas inferidas, como ``Art and Fashion Collaboration'', ``Emotional and Personal Connection'' e ``Evolution of Brand Identity''. As relações são reais, mas construídas por inferência do LLM, sem rastreabilidade ao texto original. Na Condição B, cada afirmação é ancorada em triplas verificáveis do grafo. Essa pergunta é o exemplo mais forte do experimento, pois questiona literalmente quais relações caracterizam as tendências, e apenas a Condição B responde com relações explícitas e verificáveis.
+
+A terceira pergunta de avaliação, ``Quais tendências dominaram Londres AW25?'', é qualitativamente diferente das anteriores por ser aplicada ao corpus completo. Na Condição A, o modelo de linguagem recebeu os nove textos concatenados, inferindo tendências a partir do texto e citando marcas esporadicamente. Na Condição B, o modelo consultou o grafo completo com todas as 202 triplas, respondendo com rastreabilidade explícita e citando marcas com relações concretas. Burberry e Simone Rocha concentraram a maioria das citações. A dimensão inter-documento revela a principal vantagem do grafo, que é agregar conhecimento de múltiplas fontes com rastreabilidade.
+
+Os resultados apresentados permitem algumas discussões relevantes. Barthes descreve a moda como um sistema de signos no qual o significado emerge das relações entre elementos, justificando diretamente o uso de triplas semânticas no formato (entidade, relação, entidade) como unidade de representação do conhecimento. O grafo de conhecimento captura simultaneamente as três dimensões em que a moda opera, estética, simbólica e social, em um único artefato estruturado, o que faz com que as respostas da Condição B reflitam de forma mais fiel a complexidade do fenômeno da moda e, por consequência, das tendências. A Condição A produz respostas fluentes, narrativamente bem construídas e esteticamente elegantes, porém baseadas em inferências interpretativas do modelo de linguagem não rastreáveis ao texto original, resultando em respostas generalistas e de confiabilidade limitada. A Condição B, por sua vez, ancora cada afirmação em relações explícitas do grafo, garantindo rastreabilidade, porém com menor fluidez, uma vez que os nomes exatos dos tipos de relação aparecem nas respostas, comprometendo a leiturabilidade. Vale destacar que a Condição B não elimina o uso de frequência, mas disciplina essa frequência com estrutura relacional explícita, tornando cada ocorrência rastreável e contextualizada. Observou-se ainda que as respostas da Condição B concentraram citações nas marcas com maior número de triplas extraídas, indicando que o grafo reflete a distribuição das triplas, não necessariamente a relevância das tendências. Por fim, o número de itens nas respostas variou entre as condições sem critério explícito, revelando que o modelo de linguagem não opera com critério fixo de agregação, o que constitui uma limitação metodológica relevante.
+
+\section{Ameaças à Validade}
+\label{sec:ameacas}
+
+Este experimento apresenta limitações que devem ser consideradas na interpretação dos resultados. O corpus utilizado é composto por nove reviews, suficiente para uma prova de conceito, mas insuficiente para validação estatística ou generalização dos achados para outros contextos, temporadas ou fontes editoriais. O próprio autor é o único avaliador, o que introduz risco de viés de confirmação e pode comprometer a imparcialidade dos resultados. A ontologia mínima foi definida a priori pelo pesquisador com base na teoria da moda, não derivada formalmente de uma ontologia consolidada do domínio, introduzindo viés de construção, uma vez que outros pesquisadores poderiam escolher tipos de relação diferentes, produzindo grafos com estrutura distinta e possivelmente resultados diferentes. O modelo de linguagem utilizou a entidade genérica \textit{collection} como nó central na extração das triplas, em vez de nomear a coleção específica, o que constitui uma limitação do prompt e reduz a especificidade do grafo. As respostas da Condição B expõem os nomes exatos dos tipos de relação definidos na ontologia, o que compromete a fluidez da leitura e pode afetar a avaliação de interpretabilidade pelo avaliador, sendo esse comportamento inerente à consulta ao grafo estruturado e uma limitação do critério de avaliação adotado. Por fim, o número de itens nas respostas variou entre as condições sem critério explícito, revelando que o modelo de linguagem não opera com critério fixo de agregação, o que constitui uma limitação metodológica adicional.
+
+\section{Conclusão}
+\label{sec:conclusao}
+
+Este trabalho investigou em que medida respostas sobre tendências de moda geradas com apoio de um grafo de conhecimento são mais interpretáveis e fundamentadas do que respostas geradas diretamente sobre texto bruto por um modelo de linguagem de grande escala. Os resultados indicam que o grafo de conhecimento oferece uma estrutura de representação mais fiel à complexidade do fenômeno da moda, ancorando cada afirmação em relações explícitas e garantindo rastreabilidade. Embora as respostas baseadas no grafo apresentem menor fluidez narrativa, revelam elementos técnicos com maior clareza, contribuindo para a interpretabilidade e a fundamentação das análises. Os resultados são consistentes com a questão de pesquisa e estabelecem bases para os próximos passos da pesquisa.
+
+Como trabalhos futuros, pretende-se expandir o corpus para outras marcas, cidades e temporadas, aumentando o poder de generalização dos resultados. O prompt de extração de triplas será corrigido para utilizar o nome específico da marca como nó central, em substituição à entidade genérica \textit{collection}, aumentando a especificidade do grafo. O prompt de consulta da Condição B será refinado para produzir respostas com maior fluidez e número de itens padronizado. A ontologia mínima será formalizada em OWL/RDF, derivada de uma ontologia consolidada do domínio da moda. Por fim, pretende-se conduzir uma avaliação com painel de especialistas para fortalecer a validação dos resultados.
+
+\section{Reprodutibilidade (Artefatos)}
+\label{sec:reproducibilidade}
+
+Os artefatos deste experimento estão disponíveis publicamente no repositório GitHub em \url{https://github.com/diegofelixlima/beyond-frequency} e arquivados no Zenodo com DOI \href{https://doi.org/10.5281/zenodo.21365305}{10.5281/zenodo.21365305}. O experimento pode ser reproduzido integralmente via Google Colab, sem necessidade de instalação local, por meio do notebook disponível em \texttt{notebooks/experiment.ipynb}. São necessários uma conta Google e uma chave de acesso à OpenAI API com suporte ao modelo gpt-4o-mini. Para reproduzir, basta abrir o notebook no Google Colab, configurar a chave via Colab Secrets e executar todas as células sequencialmente do passo 0 ao passo 6. O corpus é composto por nove reviews de fashion shows coletados do website The Impression, com proveniência documentada em \texttt{data/raw/SOURCES.md}. Os dados brutos imutáveis estão preservados em \texttt{data/raw/} e os resultados originais em \texttt{results/}. O uso de ferramentas de IA está declarado em conformidade com a Portaria CNPq nº 2.664/2026 no arquivo \texttt{prompts/prompts.md}. Todo o projeto foi concebido e executado segundo os princípios de Open Science.
+
+%%
+%% REFERÊNCIAS
+%%
+\bibliographystyle{ACM-Reference-Format}
+
+\begin{thebibliography}{5}
+
+\bibitem{statista2025}
+Statista. 2025.
+\newblock \textit{Global Fashion Industry Market Size 2025}.
+\newblock Statista. Disponível em: https://www.statista.com. Acesso em: jun. 2026.
+
+\bibitem{jiju2024}
+Jiju~et~al. 2024.
+\newblock Review on fashion trend analysis and forecasting techniques.
+\newblock \textit{Journal of Fashion Technology \& Textile Engineering}.
+
+\bibitem{hogan2021}
+Aidan Hogan~et~al. 2021.
+\newblock Knowledge Graphs.
+\newblock \textit{ACM Computing Surveys} 54, 4 (2021), 1--37.
+
+\bibitem{barthes1967}
+Roland Barthes. 1967.
+\newblock \textit{The Fashion System}.
+\newblock Hill and Wang, New York.
+
+\bibitem{zhong2023}
+Lingkai Zhong, Mu Wang, Jianxin Ma, Yuting Ding, Botian Shi, Haofen Wang, and Weikang Wang. 2023.
+\newblock A Comprehensive Survey on Automatic Knowledge Graph Construction.
+\newblock \textit{ACM Computing Surveys} 56, 4 (2023), 1--62.
+
+\end{thebibliography}
+
+\end{document}
