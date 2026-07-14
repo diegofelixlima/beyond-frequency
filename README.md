@@ -1,4 +1,7 @@
+# Além da Frequência: Grafos de Conhecimento para Análise de Tendências de Moda
 # Beyond Frequency: Knowledge Graphs for Fashion Trend Analysis
+
+&nbsp;
 
 This repository contains the full experimental pipeline for the paper:
 
