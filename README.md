@@ -1,5 +1,3 @@
-# beyond-frequency
-Knowledge Graph-based approach for fashion trend analysis | Experiment for Reproducibility in Computer Science Research
 # Beyond Frequency: Knowledge Graphs for Fashion Trend Analysis
 
 This repository contains the full experimental pipeline for the paper:
